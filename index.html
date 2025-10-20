@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VPN Pricing Plans</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 60px;
+        }
+
+        .header h1 {
+            font-size: 3em;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.95;
+        }
+
+        .toggle-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 50px;
+        }
+
+        .toggle-label {
+            color: white;
+            font-size: 1.1em;
+            font-weight: 500;
+        }
+
+        .toggle {
+            position: relative;
+            width: 60px;
+            height: 30px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 30px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .toggle.active {
+            background: rgba(255, 255, 255, 0.5);
+        }
+
+        .toggle-slider {
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 24px;
+            height: 24px;
+            background: white;
+            border-radius: 50%;
+            transition: 0.3s;
+        }
+
+        .toggle.active .toggle-slider {
+            left: 33px;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .pricing-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+        }
+
+        .pricing-card.featured {
+            border: 3px solid #667eea;
+        }
+
+        .featured-badge {
+            position: absolute;
+            top: 20px;
+            right: -35px;
+            background: #667eea;
+            color: white;
+            padding: 5px 40px;
+            transform: rotate(45deg);
+            font-size: 0.85em;
+            font-weight: 600;
+        }
+
+        .plan-name {
+            font-size: 1.8em;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 15px;
+        }
+
+        .plan-description {
+            color: #718096;
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+
+        .price {
+            display: flex;
+            align-items: baseline;
+            margin-bottom: 10px;
+        }
+
+        .currency {
+            font-size: 1.5em;
+            color: #4a5568;
+            font-weight: 600;
+        }
+
+        .amount {
+            font-size: 3.5em;
+            font-weight: 800;
+            color: #667eea;
+        }
+
+        .period {
+            font-size: 1.1em;
+            color: #718096;
+            margin-left: 5px;
+        }
+
+        .save-badge {
+            display: inline-block;
+            background: #48bb78;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .features {
+            list-style: none;
+            margin: 30px 0;
+        }
+
+        .features li {
+            padding: 12px 0;
+            color: #4a5568;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .features li:last-child {
+            border-bottom: none;
+        }
+
+        .check {
+            color: #48bb78;
+            margin-right: 12px;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        .cta-button {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .cta-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .provider-section {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin-top: 40px;
+        }
+
+        .provider-section h2 {
+            text-align: center;
+            color: #2d3748;
+            font-size: 2em;
+            margin-bottom: 30px;
+        }
+
+        .provider-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+
+        .provider-card {
+            background: #f7fafc;
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .provider-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .provider-logo {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+        }
+
+        .provider-name {
+            font-size: 1.3em;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 10px;
+        }
+
+        .provider-cost {
+            color: #718096;
+            font-size: 0.95em;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2em;
+            }
+
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Choose Your VPN Plan</h1>
+            <p>Deploy your own private VPN server on your preferred cloud provider</p>
+        </div>
+
+        <div class="toggle-container">
+            <span class="toggle-label">Monthly</span>
+            <div class="toggle" id="billingToggle">
+                <div class="toggle-slider"></div>
+            </div>
+            <span class="toggle-label">Yearly <span style="color: #48bb78;">(Save 20%)</span></span>
+        </div>
+
+        <div class="pricing-grid">
+            <div class="pricing-card">
+                <div class="plan-name">Starter</div>
+                <div class="plan-description">Perfect for individuals who want basic privacy protection</div>
+                <div class="price">
+                    <span class="currency">$</span>
+                    <span class="amount" id="starter-price">4.99</span>
+                    <span class="period">/month</span>
+                </div>
+                <div class="save-badge" id="starter-save" style="display: none;">Save $11.98/year</div>
+                <ul class="features">
+                    <li><span class="check">✓</span> 1 VPN Server</li>
+                    <li><span class="check">✓</span> 3 Simultaneous Connections</li>
+                    <li><span class="check">✓</span> Basic Server Locations</li>
+                    <li><span class="check">✓</span> WireGuard & OpenVPN</li>
+                    <li><span class="check">✓</span> Full Root Access</li>
+                    <li><span class="check">✓</span> Email Support</li>
+                </ul>
+                <button class="cta-button">Get Started</button>
+            </div>
+
+            <div class="pricing-card featured">
+                <div class="featured-badge">POPULAR</div>
+                <div class="plan-name">Pro</div>
+                <div class="plan-description">For power users and small teams needing flexibility</div>
+                <div class="price">
+                    <span class="currency">$</span>
+                    <span class="amount" id="pro-price">9.99</span>
+                    <span class="period">/month</span>
+                </div>
+                <div class="save-badge" id="pro-save" style="display: none;">Save $23.98/year</div>
+                <ul class="features">
+                    <li><span class="check">✓</span> 3 VPN Servers</li>
+                    <li><span class="check">✓</span> 10 Simultaneous Connections</li>
+                    <li><span class="check">✓</span> All Server Locations</li>
+                    <li><span class="check">✓</span> WireGuard & OpenVPN</li>
+                    <li><span class="check">✓</span> Full Root Access</li>
+                    <li><span class="check">✓</span> Auto-Backup & Snapshots</li>
+                    <li><span class="check">✓</span> Priority Support</li>
+                    <li><span class="check">✓</span> Server Analytics Dashboard</li>
+                </ul>
+                <button class="cta-button">Get Started</button>
+            </div>
+
+            <div class="pricing-card">
+                <div class="plan-name">Business</div>
+                <div class="plan-description">Enterprise-grade solution for teams and organizations</div>
+                <div class="price">
+                    <span class="currency">$</span>
+                    <span class="amount" id="business-price">19.99</span>
+                    <span class="period">/month</span>
+                </div>
+                <div class="save-badge" id="business-save" style="display: none;">Save $47.98/year</div>
+                <ul class="features">
+                    <li><span class="check">✓</span> Unlimited VPN Servers</li>
+                    <li><span class="check">✓</span> Unlimited Connections</li>
+                    <li><span class="check">✓</span> All Global Locations</li>
+                    <li><span class="check">✓</span> All VPN Protocols</li>
+                    <li><span class="check">✓</span> Full Root Access</li>
+                    <li><span class="check">✓</span> Advanced Security Features</li>
+                    <li><span class="check">✓</span> Team Management Tools</li>
+                    <li><span class="check">✓</span> 24/7 Priority Support</li>
+                    <li><span class="check">✓</span> Custom Integrations (API)</li>
+                    <li><span class="check">✓</span> Dedicated Account Manager</li>
+                </ul>
+                <button class="cta-button">Get Started</button>
+            </div>
+        </div>
+
+        <div class="provider-section">
+            <h2>Supported Cloud Providers</h2>
+            <p style="text-align: center; color: #718096; margin-bottom: 30px;">Deploy your VPN servers on your preferred infrastructure. You only pay the provider's compute costs.</p>
+            <div class="provider-grid">
+                <div class="provider-card">
+                    <div class="provider-logo">☁️</div>
+                    <div class="provider-name">Google Cloud</div>
+                    <div class="provider-cost">Starting at $4.28/month</div>
+                </div>
+                <div class="provider-card">
+                    <div class="provider-logo">📦</div>
+                    <div class="provider-name">AWS</div>
+                    <div class="provider-cost">Starting at $3.50/month</div>
+                </div>
+                <div class="provider-card">
+                    <div class="provider-logo">💧</div>
+                    <div class="provider-name">Digital Ocean</div>
+                    <div class="provider-cost">Starting at $4.00/month</div>
+                </div>
+            </div>
+            <p style="text-align: center; color: #718096; margin-top: 25px; font-size: 0.95em;">
+                * Cloud provider costs are billed separately and vary by region and specifications
+            </p>
+        </div>
+    </div>
+
+    <script>
+        const toggle = document.getElementById('billingToggle');
+        const prices = {
+            starter: { monthly: 4.99, yearly: 3.99 },
+            pro: { monthly: 9.99, yearly: 7.99 },
+            business: { monthly: 19.99, yearly: 15.99 }
+        };
+
+        toggle.addEventListener('click', () => {
+            toggle.classList.toggle('active');
+            const isYearly = toggle.classList.contains('active');
+
+            document.getElementById('starter-price').textContent = 
+                isYearly ? prices.starter.yearly : prices.starter.monthly;
+            document.getElementById('pro-price').textContent = 
+                isYearly ? prices.pro.yearly : prices.pro.monthly;
+            document.getElementById('business-price').textContent = 
+                isYearly ? prices.business.yearly : prices.business.monthly;
+
+            document.getElementById('starter-save').style.display = isYearly ? 'inline-block' : 'none';
+            document.getElementById('pro-save').style.display = isYearly ? 'inline-block' : 'none';
+            document.getElementById('business-save').style.display = isYearly ? 'inline-block' : 'none';
+        });
+    </script>
+</body>
+</html>
