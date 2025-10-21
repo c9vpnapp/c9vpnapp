@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>C9VPN - Account Deletion Request</title>
+  <style>
+    body {
+      font-family: "Segoe UI", Roboto, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #007bff, #00c6ff);
+      color: #333;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 50px auto;
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      padding: 40px;
+    }
+
+    .logo {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 30px;
+    }
+
+    .logo img {
+      width: 100px;
+      height: 100px;
+      border-radius: 20px;
+    }
+
+    .logo h1 {
+      margin-top: 15px;
+      font-size: 28px;
+      color: #007bff;
+    }
+
+    h2 {
+      color: #007bff;
+      border-bottom: 2px solid #e0e0e0;
+      padding-bottom: 5px;
+    }
+
+    p {
+      line-height: 1.6;
+      margin: 10px 0;
+    }
+
+    a {
+      color: #007bff;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      font-size: 14px;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="logo">
+      <img src="./asset/logo_of_c9vpn.png" alt="C9VPN Logo" />
+      <h1>C9VPN</h1>
+      <h3>Account Deletion Request</h3>
+    </div>
+
+    <p><strong>Last Updated:</strong> [Insert Date]</p>
+
+    <p>
+      We are committed to protecting your privacy and providing you with control over your personal data. This page outlines the process for requesting the deletion of your C9VPN account and associated data.
+    </p>
+
+    <h2>1. How to Delete Your Account</h2>
+    <p>
+      Our app provides a feature for you to delete your account directly. Please navigate to your account settings within the app to find the account deletion option.
+    </p>
+    <p>
+      If you have any issue with the account deletion process, please send an email to our support team at
+      <a href="mailto:huntertech.viet@gmail.com">huntertech.viet@gmail.com</a>.
+    </p>
+
+    <h2>2. What Data is Deleted</h2>
+    <p>
+      Upon receiving and verifying your deletion request, we will permanently delete the following personal information associated with your account:
+      <ul>
+        <li>Your account credentials (email address and password).</li>
+        <li>Your purchase history for VPN servers.</li>
+        <li>Any basic profile information you provided.</li>
+        <li>VPN server access keys and credentials tied to your account.</li>
+      </ul>
+    </p>
+
+    <h2>3. What Data May Be Retained</h2>
+    <p>
+      For legal, security, and operational purposes, some data may be retained for a limited period. This data is anonymized or aggregated and cannot be used to identify you. This includes:
+      <ul>
+        <li>Anonymized payment records required for financial and tax compliance.</li>
+        <li>Anonymized app performance data and crash reports (via Crashlytics) that are not tied to your personal account.</li>
+      </ul>
+      As stated in our Privacy Policy, we do <strong>not</strong> log your browsing history, traffic data, or DNS queries, so there is no such data to delete.
+    </p>
+
+    <h2>4. More Information</h2>
+    <p>
+      For a comprehensive overview of our data practices, please review our
+      <a href="privacy_policy.html">Privacy Policy</a>.
+    </p>
+
+    <h2>5. Contact Us</h2>
+    <p>
+      If you have any questions or issues regarding the account deletion process, please contact us at:<br />
+      📧 <a href="mailto:huntertech.viet@gmail.com">huntertech.viet@gmail.com</a>
+    </p>
+
+    <footer>
+      &copy; <span id="year"></span> C9VPN. All rights reserved.
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
