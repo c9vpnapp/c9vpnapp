@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>C9VPN - Support</title>
+  <style>
+    body {
+      font-family: "Segoe UI", Roboto, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #007bff, #00c6ff);
+      color: #333;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 50px auto;
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      padding: 40px;
+    }
+
+    .logo {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 30px;
+    }
+
+    .logo img {
+      width: 100px;
+      height: 100px;
+      border-radius: 20px;
+    }
+
+    .logo h1 {
+      margin-top: 15px;
+      font-size: 28px;
+      color: #007bff;
+    }
+
+    h2 {
+      color: #007bff;
+      border-bottom: 2px solid #e0e0e0;
+      padding-bottom: 5px;
+      margin-top: 30px;
+    }
+
+    h3 {
+        color: #333;
+        margin-top: 20px;
+    }
+
+    p, ul {
+      line-height: 1.6;
+      margin: 10px 0;
+    }
+
+    ul {
+        padding-left: 20px;
+    }
+
+    a {
+      color: #007bff;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      font-size: 14px;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="logo">
+      <img src="./asset/logo_of_c9vpn.png" alt="C9VPN Logo" />
+      <h1>C9VPN</h1>
+      <h3>Support Center</h3>
+    </div>
+
+    <p>Welcome to the C9VPN Support Center. We're here to help you get the most out of our service. If you can't find the answer you're looking for, please don't hesitate to contact us.</p>
+
+    <h2>Frequently Asked Questions (FAQ)</h2>
+    
+    <h3>How do I connect to a VPN server?</h3>
+    <p>Open the C9VPN app, log in to your account, and tap the large "Connect" button on the main screen. To choose a specific location, tap on the currently selected server to open the server list.</p>
+
+    <h3>What should I do if my connection is slow?</h3>
+    <p>Connection speed can be affected by server distance and load. Try connecting to a server geographically closer to you. If the issue persists, disconnect and reconnect to get a new server allocation.</p>
+
+    <h3>Is my data secure with C9VPN?</h3>
+    <p>Absolutely. We use industry-leading encryption to protect your internet traffic. We also have a strict no-logs policy, meaning we never track or store your online activity. For more details, please read our <a href="privacy_policy.html">Privacy Policy</a>.</p>
+
+    <h2>Troubleshooting</h2>
+
+    <h3>I can't connect to the VPN.</h3>
+    <ul>
+        <li>Ensure your device has a stable internet connection (Wi-Fi or Cellular).</li>
+        <li>Try connecting to a different VPN server location.</li>
+        <li>Restart the C9VPN app and try connecting again.</li>
+        <li>Restart your device.</li>
+    </ul>
+
+    <h3>The app is crashing or freezing.</h3>
+    <ul>
+        <li>Make sure you have the latest version of C9VPN installed from the App Store.</li>
+        <li>Try restarting your device to clear its memory.</li>
+        <li>If the problem continues, please contact our support team with details about the issue.</li>
+    </ul>
+
+    <h2>Reporting an Issue</h2>
+    <p>
+      To help us resolve your issue as quickly as possible, please include the following information when you contact our support team:
+      <ul>
+        <li>The email address associated with your C9VPN account.</li>
+        <li>The device model you are using (e.g., iPhone 14 Pro).</li>
+        <li>The operating system version (e.g., iOS 16.5).</li>
+        <li>A detailed description of the problem and the steps to reproduce it.</li>
+      </ul>
+    </p>
+
+    <h2>Contact Us</h2>
+    <p>
+      If you need further assistance, our support team is ready to help. Please reach out to us via email:
+      <br />
+      📧 <a href="mailto:support@c9vpn.com">support@c9vpn.com</a>
+    </p>
+
+    <footer>
+      &copy; <span id="year"></span> C9VPN. All rights reserved.
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
