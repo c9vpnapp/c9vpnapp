@@ -1,0 +1,14 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.thvpn.app.c9vpn",
+      "sha256_cert_fingerprints":
+        [
+            "5C:51:FD:E9:89:86:DC:54:00:5D:CD:2F:0B:8A:F3:06:61:99:34:02:F1:3E:46:9D:AB:F0:29:18:C1:32:52:5F",
+            "50:ED:C9:40:C9:C4:EA:33:32:9C:88:0C:9F:26:91:E0:1A:07:21:4E:05:87:EB:04:9D:C9:DC:54:34:19:F3:48"
+        ]
+    }
+  }
+]

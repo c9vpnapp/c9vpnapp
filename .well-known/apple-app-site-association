@@ -1,0 +1,15 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": ["YOUR_TEAM_ID.com.thvpn.app.c9vpn"],
+        "components": [
+          {
+            "/": "/*",
+            "comment": "Matches all pages"
+          }
+        ]
+      }
+    ]
+  }
+}
