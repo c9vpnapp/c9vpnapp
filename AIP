@@ -1,0 +1,14 @@
+--Add a hover effect to the logo so it slightly scales up when the user mouses over it.
+--Make the navigation bar sticky so it stays at the top of the screen when scrolling.
+
+-- Add a new section with the screenshots that describes the generic flow of C9VPN.
+
+1. List of Paid Vpn Keys with connected state screenshot
+2. List of Private Server screen
+3. List of VPN Key generated in selected Private Server
+4. Server Metrics Screenshot
+
+--Add a lightbox effect so that clicking on a screenshot opens it in a larger view.
+--Update the "App Overview" section to use a carousel/slider for the screenshots on mobile devices.
+
+--Help me adding the wireframe of mobile device to all the screenshots

@@ -16,10 +16,14 @@
             --success-green: #48bb78;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             margin: 0;
-            padding: 0;
+            padding: 80px 0 0 0;
             color: var(--text-dark);
             background-color: var(--white);
             line-height: 1.6;
@@ -33,12 +37,16 @@
             padding: 20px 10%;
             background: var(--white);
             box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            position: sticky;
+            position: fixed;
             top: 0;
+            left: 0;
+            width: 100%;
+            box-sizing: border-box;
             z-index: 1000;
         }
 
-        nav .logo img { height: 40px; }
+        nav .logo img { height: 40px; border-radius: 10px; transition: transform 0.3s ease; }
+        nav .logo img:hover { transform: scale(1.1); }
 
         nav ul { display: flex; list-style: none; gap: 30px; margin: 0; }
 
@@ -166,6 +174,7 @@
         .cta-button {
             width: 100%;
             padding: 15px;
+            box-sizing: border-box;
             background: var(--primary-blue);
             color: white;
             border: none;
@@ -183,17 +192,144 @@
         .app-image { flex: 1; text-align: center; }
         .play-store-btn img { height: 60px; margin-top: 20px; }
 
+        /* Flow Section */
+        .flow-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .flow-item {
+            background: var(--white);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .flow-item:hover { transform: translateY(-10px); }
+        
+        .phone-mockup {
+            border: 12px solid #1a1a1a;
+            border-radius: 30px;
+            overflow: hidden;
+            position: relative;
+            background: #1a1a1a;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            margin: 20px auto 0;
+            width: 100%;
+            max-width: 240px;
+        }
+
+        .phone-mockup img {
+            width: 100%;
+            display: block;
+            cursor: pointer;
+        }
+
+        .flow-item h3 { color: var(--dark-bg); margin-bottom: 10px; font-size: 1.2rem; }
+        .flow-item p { font-size: 0.9rem; color: var(--text-light); }
+
         /* Footer */
         footer { background: #111; color: #888; padding: 50px 10%; text-align: center; }
         .footer-logo img { height: 40px; margin-bottom: 20px; filter: grayscale(1) brightness(2); }
         .footer-links { margin: 20px 0; }
         .footer-links a { color: #888; text-decoration: none; margin: 0 15px; font-size: 14px; }
         .footer-links a:hover { color: white; }
+        
+        /* Footer Socials */
+        .footer-socials { display: flex; justify-content: center; gap: 25px; }
+        .footer-socials a { color: #888; font-size: 24px; transition: all 0.3s ease; }
+
+        /* Lightbox */
+        .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .lightbox-content {
+            max-width: 90%;
+            max-height: 90vh;
+            border-radius: 5px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+        }
+
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        /* Info Modal */
+        .info-modal {
+            display: none;
+            position: fixed;
+            z-index: 2001;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .info-modal-content {
+            background-color: var(--white);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+            position: relative;
+        }
+
+        .close-info {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 24px;
+            cursor: pointer;
+            color: #aaa;
+        }
+        .close-info:hover { color: #000; }
 
         @media (max-width: 768px) {
             .hero, .app-download { flex-direction: column; text-align: center; align-items: center; }
             .hero-image { text-align: center; }
             nav ul { display: none; }
+
+            /* Mobile Carousel for App Overview */
+            .flow-grid {
+                display: flex;
+                overflow-x: auto;
+                scroll-snap-type: x mandatory;
+                gap: 20px;
+                padding-bottom: 20px;
+                scrollbar-width: none; /* Firefox */
+            }
+            .flow-grid::-webkit-scrollbar { display: none; /* Chrome/Safari */ }
+            
+            .flow-item {
+                min-width: 85%;
+                scroll-snap-align: center;
+                flex-shrink: 0;
+            }
         }
     </style>
 </head>
@@ -205,7 +341,8 @@
             <li><a href="#about">About</a></li>
             <li><a href="#pricing">Pricing</a></li>
             <li><a href="#download">Download</a></li>
-            <li><a href="#" class="btn-nav">Client Login</a></li>
+            <li><a href="#contact">Contact Us</a></li>
+            <!-- <li><a href="#" class="btn-nav">Client Login</a></li> -->
         </ul>
     </nav>
 
@@ -240,6 +377,43 @@
                 <i class="fas fa-globe" style="font-size: 40px; color: var(--primary-blue); margin-bottom: 20px;"></i>
                 <h3>Global Reach</h3>
                 <p>Deploy in 50+ locations across Google Cloud, AWS, and DigitalOcean.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="flow" style="background-color: var(--light-bg);">
+        <div class="section-header">
+            <h2>App Overview</h2>
+            <p>Complete control over your VPN infrastructure in four simple steps.</p>
+        </div>
+        <div class="flow-grid">
+            <div class="flow-item">
+                <h3>1. Connect</h3>
+                <p>View your active keys and connection status instantly.</p>
+                <div class="phone-mockup">
+                    <img src="./asset/screen_1_connected.png" alt="Connected VPN Keys">
+                </div>
+            </div>
+            <div class="flow-item">
+                <h3>2. Manage Servers</h3>
+                <p>Deploy and oversee your private servers.</p>
+                <div class="phone-mockup">
+                    <img src="./asset/screen_2_servers.png" alt="Private Servers">
+                </div>
+            </div>
+            <div class="flow-item">
+                <h3>3. Generate Keys</h3>
+                <p>Create VPN keys for all your devices.</p>
+                <div class="phone-mockup">
+                    <img src="./asset/screen_3_keys.png" alt="Generate Keys">
+                </div>
+            </div>
+            <div class="flow-item">
+                <h3>4. Monitor Metrics</h3>
+                <p>Track server performance and usage metrics.</p>
+                <div class="phone-mockup">
+                    <img src="./asset/screen_4_metrics.png" alt="Server Metrics">
+                </div>
             </div>
         </div>
     </section>
@@ -312,21 +486,48 @@
         
         <div class="app-text">
             <h2>Take your security on the go</h2>
-            <p>Manage your servers, generate keys, and connect instantly with our mobile app. Available for Android.</p>
+            <p>Manage your servers, generate keys, and connect instantly with our mobile app. Available for Android. For iOS, generate your key from C9 and use it with the compatible Outline client.</p>
             <a href="https://play.google.com/store/apps/details?id=com.thvpn.app.c9vpn" target="_blank" class="play-store-btn">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Get it on Google Play">
             </a>
+            <a href="https://apps.apple.com/us/app/outline-app/id1356177741" target="_blank" class="play-store-btn">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Download_on_the_App_Store_Badge.svg" alt="Download on the App Store">
+            </a>
+            <p style="font-size: 0.8rem; opacity: 0.7; margin-top: 10px;">Our native iOS app is coming soon.</p>
         </div>       
     </section>
 
+    <section class="section" id="contact">
+        <div class="section-header">
+            <h2>Contact Us</h2>
+            <p>We are here to help. Reach out to us via any of these channels.</p>
+        </div>
+        <div id="contact-section-list" style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;"></div>
+    </section>
+
     <footer>
-        <p>Your Private Secure Connection. Powered by Google Cloud, AWS, and DigitalOcean.</p>
+        <p>Your Private Secure Connection. Powered by Google Cloud, AWS, and DigitalOcean.</p>        
         <div class="footer-links">
             <a href="https://c9vpn.store/privacy_policy.html">Privacy Policy</a>
             <a href="https://c9vpn.store/term_and_condition.html">Terms of Service</a>            
         </div>
         <p style="font-size: 12px;">&copy; 2026 C9VPN. All rights reserved.</p>
     </footer>
+
+    <div id="lightbox" class="lightbox">
+        <span class="close">&times;</span>
+        <img class="lightbox-content" id="lightbox-img">
+    </div>
+
+    <div id="pricing-modal" class="info-modal">
+        <div class="info-modal-content">
+            <span class="close-info">&times;</span>
+            <h3 style="color: var(--primary-blue); margin-top: 0;">Coming Soon</h3>
+            <p>The auto-setup feature is currently under development.</p>
+            <p>For now, please contact the admin directly via one of the channels below:</p>
+            <div id="contact-list" style="display: flex; flex-direction: column; gap: 10px; margin-top: 20px;"></div>
+        </div>
+    </div>
 
     <script>
         const toggle = document.getElementById('billingToggle');
@@ -342,6 +543,122 @@
             document.getElementById('pro-price').innerText = isYearly ? prices.pro.yearly : prices.pro.monthly;
             document.getElementById('business-price').innerText = isYearly ? prices.business.yearly : prices.business.monthly;
         });
+
+        // Lightbox script
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const closeBtn = document.getElementsByClassName('close')[0];
+
+        document.querySelectorAll('.flow-item img').forEach(img => {
+            img.addEventListener('click', function() {
+                lightbox.style.display = "flex";
+                lightboxImg.src = this.src;
+            });
+        });
+
+        closeBtn.onclick = function() {
+            lightbox.style.display = "none";
+        }
+
+        lightbox.onclick = function(e) {
+            if (e.target !== lightboxImg) {
+                lightbox.style.display = "none";
+            }
+        }
+
+        // Pricing Modal script
+        const pricingModal = document.getElementById('pricing-modal');
+        const closeInfoBtn = document.querySelector('.close-info');
+        const pricingButtons = document.querySelectorAll('.pricing-card .cta-button');
+        const contactList = document.getElementById('contact-list');
+        const footerContactList = document.getElementById('footer-contact-list');
+        const contactSectionList = document.getElementById('contact-section-list');
+
+        // Data from Remote Config
+        const contactChannels = [
+          {
+            "name": "Telegram",
+            "url": "https://t.me/C9VpnAdmin"
+          },
+          {
+            "name": "WhatsApp",
+            "url": "https://wa.me/+66954317326"
+          },
+          {
+            "name": "Viber",
+            "url": "https://connect.viber.com/business/c7842254-fab9-11f0-9edc-5261f4f0cc4c"
+          }
+        ];
+
+        const getChannelStyle = (name) => {
+            const lower = name.toLowerCase();
+            if (lower.includes('telegram')) return { icon: 'fab fa-telegram', color: '#0088cc' };
+            if (lower.includes('whatsapp')) return { icon: 'fab fa-whatsapp', color: '#25D366' };
+            if (lower.includes('viber')) return { icon: 'fab fa-viber', color: '#7360f2' };
+            return { icon: 'fas fa-link', color: '#333' };
+        };
+
+        contactChannels.forEach(channel => {
+            const style = getChannelStyle(channel.name);
+            
+            const btn = document.createElement('a');
+            btn.href = channel.url;
+            btn.target = "_blank";
+            btn.className = "cta-button";
+            btn.style.textDecoration = "none";
+            btn.style.backgroundColor = style.color;
+            btn.style.display = "flex";
+            btn.style.alignItems = "center";
+            btn.style.justifyContent = "center";
+            btn.style.gap = "10px";
+            btn.innerHTML = `<i class="${style.icon}"></i> ${channel.name}`;
+            contactList.appendChild(btn);
+
+            // Add to Footer
+            if (footerContactList) {
+                const iconLink = document.createElement('a');
+                iconLink.href = channel.url;
+                iconLink.target = "_blank";
+                iconLink.innerHTML = `<i class="${style.icon}"></i>`;
+                iconLink.onmouseenter = () => iconLink.style.color = style.color;
+                iconLink.onmouseleave = () => iconLink.style.color = '';
+                footerContactList.appendChild(iconLink);
+            }
+
+            // Add to Contact Section
+            if (contactSectionList) {
+                const sectionBtn = document.createElement('a');
+                sectionBtn.href = channel.url;
+                sectionBtn.target = "_blank";
+                sectionBtn.className = "cta-button";
+                sectionBtn.style.textDecoration = "none";
+                sectionBtn.style.backgroundColor = style.color;
+                sectionBtn.style.display = "flex";
+                sectionBtn.style.alignItems = "center";
+                sectionBtn.style.justifyContent = "center";
+                sectionBtn.style.gap = "10px";
+                sectionBtn.style.width = "auto";
+                sectionBtn.style.minWidth = "200px";
+                sectionBtn.innerHTML = `<i class="${style.icon}"></i> ${channel.name}`;
+                contactSectionList.appendChild(sectionBtn);
+            }
+        });
+
+        pricingButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                pricingModal.style.display = "flex";
+            });
+        });
+
+        closeInfoBtn.onclick = function() {
+            pricingModal.style.display = "none";
+        }
+
+        pricingModal.onclick = function(e) {
+            if (e.target === pricingModal) {
+                pricingModal.style.display = "none";
+            }
+        }
     </script>
 </body>
 </html>
