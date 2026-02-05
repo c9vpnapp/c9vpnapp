@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C9VPN | Your Private Secure Connection</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-blue: #0088cc;
+            --dark-bg: #1a1a1a;
+            --light-bg: #f4f7f9;
+            --white: #ffffff;
+            --text-dark: #333;
+            --text-light: #666;
+            --success-green: #48bb78;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: var(--text-dark);
+            background-color: var(--white);
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 10%;
+            background: var(--white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav .logo img { height: 40px; }
+
+        nav ul { display: flex; list-style: none; gap: 30px; margin: 0; }
+
+        nav ul li a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        nav ul li a:hover { color: var(--primary-blue); }
+
+        .btn-nav {
+            background: var(--primary-blue);
+            color: white !important;
+            padding: 10px 20px;
+            border-radius: 5px;
+        }
+
+        /* Hero Section */
+        .hero {
+            display: flex;
+            align-items: center;
+            padding: 80px 10%;
+            background: linear-gradient(135deg, #f4f7f9 0%, #ffffff 100%);
+            gap: 50px;
+        }
+
+        .hero-text { flex: 1; }
+        .hero-text h1 { font-size: 3rem; color: var(--dark-bg); margin-bottom: 20px; line-height: 1.2; }
+        .hero-text p { font-size: 1.2rem; color: var(--text-light); margin-bottom: 30px; }
+
+        .hero-image { flex: 1; text-align: right; }
+        .hero-image img { width: 100%; max-width: 550px; border-radius: 15px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+
+        /* About Section */
+        .section { padding: 80px 10%; text-align: center; }
+        .section-header h2 { font-size: 2.5rem; color: var(--primary-blue); }
+        .section-header p { max-width: 700px; margin: 0 auto 50px; color: var(--text-light); }
+
+        /* Pricing Section */
+        .pricing-section { background-color: var(--light-bg); padding: 80px 10%; }
+        
+        .toggle-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 50px;
+        }
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 30px;
+        }
+
+        .switch input { opacity: 0; width: 0; height: 0; }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 22px; width: 22px;
+            left: 4px; bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider { background-color: var(--primary-blue); }
+        input:checked + .slider:before { transform: translateX(30px); }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .pricing-card {
+            background: var(--white);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: 0.3s;
+            position: relative;
+            border: 1px solid #eee;
+        }
+
+        .pricing-card.featured {
+            border: 2px solid var(--primary-blue);
+            transform: scale(1.05);
+            z-index: 2;
+        }
+
+        .featured-badge {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--primary-blue);
+            color: white;
+            padding: 5px 20px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .price { font-size: 2.5rem; font-weight: bold; margin: 20px 0; }
+        .price span { font-size: 1rem; color: var(--text-light); }
+
+        .features { list-style: none; padding: 0; margin: 30px 0; text-align: left; }
+        .features li { margin-bottom: 12px; font-size: 14px; }
+        .features li i { color: var(--success-green); margin-right: 10px; }
+
+        .cta-button {
+            width: 100%;
+            padding: 15px;
+            background: var(--primary-blue);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .cta-button:hover { background: #0077b3; }
+
+        /* App Section */
+        .app-download { background: var(--dark-bg); color: white; padding: 80px 10%; display: flex; align-items: flex-start; gap: 50px; }
+        .app-text { flex: 1; }
+        .app-image { flex: 1; text-align: center; }
+        .play-store-btn img { height: 60px; margin-top: 20px; }
+
+        /* Footer */
+        footer { background: #111; color: #888; padding: 50px 10%; text-align: center; }
+        .footer-logo img { height: 40px; margin-bottom: 20px; filter: grayscale(1) brightness(2); }
+        .footer-links { margin: 20px 0; }
+        .footer-links a { color: #888; text-decoration: none; margin: 0 15px; font-size: 14px; }
+        .footer-links a:hover { color: white; }
+
+        @media (max-width: 768px) {
+            .hero, .app-download { flex-direction: column; text-align: center; align-items: center; }
+            .hero-image { text-align: center; }
+            nav ul { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="#" class="logo"><img src="https://c9vpn.store/asset/logo_of_c9vpn.png" alt="C9VPN"></a>
+        <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#pricing">Pricing</a></li>
+            <li><a href="#download">Download</a></li>
+            <li><a href="#" class="btn-nav">Client Login</a></li>
+        </ul>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-text">
+            <h1>Deploy Your Own Private VPN Server</h1>
+            <p>Experience true privacy. Deploy dedicated VPN servers on the world's leading cloud providers with one click. No shared IPs, no logs, total control.</p>
+            <a href="#pricing" class="cta-button" style="padding: 15px 40px; text-decoration: none;">Get Started Now</a>
+        </div>
+        <div class="hero-image">
+            <img src="https://c9vpn.store/asset/feature_graphic.png" alt="C9VPN Features">
+        </div>
+    </header>
+
+    <section class="section" id="about">
+        <div class="section-header">
+            <h2>Why C9VPN?</h2>
+            <p>We provide the orchestration layer that lets you own your infrastructure. You choose the cloud, we handle the security.</p>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px;">
+            <div>
+                <i class="fas fa-server" style="font-size: 40px; color: var(--primary-blue); margin-bottom: 20px;"></i>
+                <h3>Dedicated Resources</h3>
+                <p>Never share your bandwidth. Every server is a private instance dedicated to you.</p>
+            </div>
+            <div>
+                <i class="fas fa-shield-alt" style="font-size: 40px; color: var(--primary-blue); margin-bottom: 20px;"></i>
+                <h3>Root Access</h3>
+                <p>Full control over your VPN protocols including WireGuard and OpenVPN with root privileges.</p>
+            </div>
+            <div>
+                <i class="fas fa-globe" style="font-size: 40px; color: var(--primary-blue); margin-bottom: 20px;"></i>
+                <h3>Global Reach</h3>
+                <p>Deploy in 50+ locations across Google Cloud, AWS, and DigitalOcean.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="pricing-section" id="pricing">
+        <div class="section-header">
+            <h2>Simple, Transparent Pricing</h2>
+            <p>Deploy your private VPN server on your preferred cloud provider. Save 20% on yearly plans!</p>
+        </div>
+
+        <div class="toggle-container">
+            <span>Monthly</span>
+            <label class="switch">
+                <input type="checkbox" id="billingToggle">
+                <span class="slider"></span>
+            </label>
+            <span>Yearly <span style="color: var(--success-green); font-weight: bold;">(Save 20%)</span></span>
+        </div>
+
+        <div class="pricing-grid">
+            <div class="pricing-card">
+                <h3>Starter</h3>
+                <p>For basic privacy</p>
+                <div class="price">$<span id="starter-price">4.99</span><span>/mo</span></div>
+                <ul class="features">
+                    <li><i class="fas fa-check"></i> 1 VPN Server</li>
+                    <li><i class="fas fa-check"></i> 3 Simultaneous Connections</li>
+                    <li><i class="fas fa-check"></i> WireGuard & OpenVPN</li>
+                    <li><i class="fas fa-check"></i> Email Support</li>
+                </ul>
+                <button class="cta-button">Choose Starter</button>
+            </div>
+
+            <div class="pricing-card featured">
+                <div class="featured-badge">POPULAR</div>
+                <h3>Pro</h3>
+                <p>For power users</p>
+                <div class="price">$<span id="pro-price">9.99</span><span>/mo</span></div>
+                <ul class="features">
+                    <li><i class="fas fa-check"></i> 3 VPN Servers</li>
+                    <li><i class="fas fa-check"></i> 10 Simultaneous Connections</li>
+                    <li><i class="fas fa-check"></i> Priority Support</li>
+                    <li><i class="fas fa-check"></i> Server Analytics</li>
+                </ul>
+                <button class="cta-button">Choose Pro</button>
+            </div>
+
+            <div class="pricing-card">
+                <h3>Business</h3>
+                <p>For teams</p>
+                <div class="price">$<span id="business-price">19.99</span><span>/mo</span></div>
+                <ul class="features">
+                    <li><i class="fas fa-check"></i> Unlimited VPN Servers</li>
+                    <li><i class="fas fa-check"></i> Unlimited Connections</li>
+                    <li><i class="fas fa-check"></i> API Access</li>
+                    <li><i class="fas fa-check"></i> Account Manager</li>
+                </ul>
+                <button class="cta-button">Choose Business</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="app-download" id="download">
+        <div class="app-text">
+            <h2>Direct Apk Download</h2>            
+            <a href="https://moodle-public-bucket.s3.ap-southeast-2.amazonaws.com/public_resource/c9vpn_1.2.3.apk" download class="cta-button" style="width: auto; display: inline-flex; align-items: center; gap: 10px; margin-top: 20px; text-decoration: none;">
+                <img src="./asset/logo_of_c9vpn.png" alt="C9VPN" style="height: 32px; width: auto;"> Download APK
+            </a>
+        </div>
+        
+        <div class="app-text">
+            <h2>Take your security on the go</h2>
+            <p>Manage your servers, generate keys, and connect instantly with our mobile app. Available for Android.</p>
+            <a href="https://play.google.com/store/apps/details?id=com.thvpn.app.c9vpn" target="_blank" class="play-store-btn">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Get it on Google Play">
+            </a>
+        </div>       
+    </section>
+
+    <footer>
+        <p>Your Private Secure Connection. Powered by Google Cloud, AWS, and DigitalOcean.</p>
+        <div class="footer-links">
+            <a href="https://c9vpn.store/privacy_policy.html">Privacy Policy</a>
+            <a href="https://c9vpn.store/term_and_condition.html">Terms of Service</a>            
+        </div>
+        <p style="font-size: 12px;">&copy; 2026 C9VPN. All rights reserved.</p>
+    </footer>
+
+    <script>
+        const toggle = document.getElementById('billingToggle');
+        const prices = {
+            starter: { monthly: 4.99, yearly: 3.99 },
+            pro: { monthly: 9.99, yearly: 7.99 },
+            business: { monthly: 19.99, yearly: 15.99 }
+        };
+
+        toggle.addEventListener('change', () => {
+            const isYearly = toggle.checked;
+            document.getElementById('starter-price').innerText = isYearly ? prices.starter.yearly : prices.starter.monthly;
+            document.getElementById('pro-price').innerText = isYearly ? prices.pro.yearly : prices.pro.monthly;
+            document.getElementById('business-price').innerText = isYearly ? prices.business.yearly : prices.business.monthly;
+        });
+    </script>
+</body>
+</html>
